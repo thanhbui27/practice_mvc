@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Cover Template · Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles -->
+    <style>
+      html, body {
+        height: 100%;
+      }
+
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        background-color: #333;
+        color: white;
+      }
+
+      .cover-container {
+        max-width: 70em;
+      }
+
+      .masthead {
+        margin-bottom: 2rem;
+      }
+
+      .masthead-brand {
+        margin-bottom: 0;
+      }
+
+      .nav-masthead .nav-link {
+        padding: 0.25rem 0;
+        font-weight: bold;
+        color: rgba(255, 255, 255, 0.5);
+        background-color: transparent;
+        border-bottom: 0.25rem solid transparent;
+      }
+
+      .nav-masthead .nav-link:hover {
+        color: rgba(255, 255, 255, 0.75);
+        border-bottom-color: rgba(255, 255, 255, 0.25);
+      }
+
+      .nav-masthead .nav-link.active {
+        color: white;
+        border-bottom-color: white;
+      }
+
+      .cover-heading {
+        font-size: 2.5rem;
+      }
+
+      .lead {
+        font-size: 1.25rem;
+      }
+
+      .btn-secondary {
+        color: #333;
+        background-color: white;
+        border: none;
+      }
+
+      .mastfoot {
+        color: rgba(255, 255, 255, 0.5);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+      <header class="masthead mb-auto">
+        <div class="inner d-flex flex-row justify-content-between align-items-center">
+          <h3 class="masthead-brand">Cover</h3>
+          <nav class="nav nav-masthead d-flex  justify-content-center gap-3">
+            <a class="nav-link m-3 active" href="/">Home</a>
+            <a class="nav-link m-3" href="product">Product</a>
+            <a class="nav-link m-3" href="cart">Cart</a>
+            <a th:if="${user != null}" class="nav-link m-3" href="order">Order</a>
+            <a th:if="${user == null}" class="nav-link m-3" href="/login">Login</a>
+            <a th:if="${user != null}" class="nav-link m-3" href="/logout">Logout</a>
+          </nav>
+        </div>
+      </header>
+
+      <main role="main" class="inner cover">
+        <h1 class="cover-heading">Cover your page.</h1>
+        <p class="lead">This is a simple cover page template using Bootstrap 4.</p>
+        <p class="lead">
+          <a href="#" class="btn btn-lg btn-secondary">Learn more</a>
+        </p>
+      </main>
+
+      <footer class="mastfoot mt-auto">
+        <div class="inner">
+          <p>Cover template for <a href="https://getbootstrap.com/">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+        </div>
+      </footer>
+    </div>
+
+    <!-- Bootstrap JS (Optional) -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  </body>
+</html>
