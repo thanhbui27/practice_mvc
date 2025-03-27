@@ -23,8 +23,13 @@ public class OrderServiceImpl {
     public Optional<Order> getOrderById(int id) {
         return orderRepository.findById(id);
     }
+    @Transactional
     public void saveOrder(Order order) {
-         orderRepository.save(order);
+    	try {
+            orderRepository.save(order);
+    	}catch(Exception e) {
+    		throw new RuntimeException("Fail to create order, order will rollback");
+    	}
     }
 
     public void deleteOrder(int id) {
