@@ -14,6 +14,8 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
 
 	List<Order> findByUser_userID(int userId);
 	
+	
+	//Bài 3.2  lấy ra tổng giá trị của của order trong tháng
 	@Query(value = "select \r\n"
 			+ "case \r\n"
 			+ "	   when sum(total_amount) = 0 then 0\r\n"
