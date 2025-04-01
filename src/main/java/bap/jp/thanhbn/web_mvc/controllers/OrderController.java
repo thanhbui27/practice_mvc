@@ -38,6 +38,8 @@ public class OrderController {
     	
     	List<Order> orders = null;
     	
+    	//Bài 3  lấy ra các order có giá > 1000
+    	
     	if(price == null) {
     		orders = orderService.getAllOrdersByUser(u.getUserID());
     	}else {
