@@ -9,6 +9,7 @@ import jakarta.transaction.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.time.*;
 
 @Service
 public class OrderServiceImpl {
@@ -23,9 +24,15 @@ public class OrderServiceImpl {
     public Optional<Order> getOrderById(int id) {
         return orderRepository.findById(id);
     }
+    
+    public Optional<Integer> getTotalAmountInMonth(){
+    	return orderRepository.getTotalAmountInMonth();
+    }
+    
     @Transactional
     public void saveOrder(Order order) {
     	try {
+    		order.setOrderDate(LocalDateTime.ofInstant(Instant.now(), ZoneOffset.UTC));
             orderRepository.save(order);
     	}catch(Exception e) {
     		throw new RuntimeException("Fail to create order, order will rollback");
