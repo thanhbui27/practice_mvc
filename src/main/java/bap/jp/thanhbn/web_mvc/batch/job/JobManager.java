@@ -52,15 +52,13 @@ public class JobManager {
     public boolean isAcionClearRunning = true; 
 	
 	@Scheduled(cron = "0 0 * * * *")
-	//@Scheduled(cron = "*/5 * * * * *")
 	public void runJobExportOrder() {
 		if(isAcionExportRunning) {
 			runJob("exportOrder", jobExportOrder);
 		}
 	}
 	
-	//@Scheduled(cron = "0 5 * * * *")
-	@Scheduled(cron = "*/3 * * * * *")
+	@Scheduled(cron = "0 5 * * * *")
 	public void runJobImportProduct() {
 		if(isAcionImportRunning) {
 			runJob("importProduct", jobImportProduct);		
@@ -69,7 +67,6 @@ public class JobManager {
 	}
 	
 	@Scheduled(cron = "0 1 0 1 * *")
-	//@Scheduled(cron = "*/9 * * * * *")
 	public void runJobClearData() {
 		if(isAcionClearRunning) {
 			runJob("jobClearDataUserAndProduct", jobClearData);
