@@ -7,6 +7,7 @@ import bap.jp.thanhbn.web_mvc.model.Order;
 
 public interface OrderService {
 	List<Order> findByUserId(int id);
+	List<Order> getAllOrder();
 	Optional<Order> getOrderById(int id);
 	void deleteOrder(int id);
 	void saveOrder(Order order);

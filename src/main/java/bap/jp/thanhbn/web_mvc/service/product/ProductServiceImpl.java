@@ -3,6 +3,7 @@ package bap.jp.thanhbn.web_mvc.service.product;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.batch.item.Chunk;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +27,12 @@ public class ProductServiceImpl implements ProductService{
 		// TODO Auto-generated method stub
 		return productRepository.findById(id);
 	}
-	
+
+	@Override
+	public List<Product> getAllProductNotBuy() {
+		// TODO Auto-generated method stub
+		return productRepository.getAllProductNotBuy();
+	}	
 	
 	
 }
