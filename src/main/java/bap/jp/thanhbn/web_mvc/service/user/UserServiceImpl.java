@@ -3,6 +3,7 @@ package bap.jp.thanhbn.web_mvc.service.user;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.batch.item.Chunk;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +32,12 @@ public class UserServiceImpl implements UserService{
 	public Optional<User> findByEmail(String email) {
 		// TODO Auto-generated method stub
 		 return userRepository.findByEmail(email);
+	}
+
+	@Override
+	public List<User> getAllUserNotBuyProduct() {
+		// TODO Auto-generated method stub
+		return userRepository.getAllUserNotBuyProduct();
 	}
 
 }

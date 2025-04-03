@@ -30,6 +30,17 @@ public class Product {
 	@JoinColumn(name = "category_id", nullable = false)
 	private Category category;
 
+	public Product() {
+		
+	}
+	
+	public Product( String productName, BigDecimal price, Category category) {
+		super();
+		this.productName = productName;
+		this.price = price;
+		this.category = category;
+	}
+
 	public int getProductID() {
 		return productID;
 	}
@@ -60,6 +71,12 @@ public class Product {
 
 	public void setCategory(Category category) {
 		this.category = category;
+	}
+
+	@Override
+	public String toString() {
+		return "Product [productID=" + productID + ", productName=" + productName + ", price=" + price + ", category="
+				+ category + "]";
 	}
 	
 	
