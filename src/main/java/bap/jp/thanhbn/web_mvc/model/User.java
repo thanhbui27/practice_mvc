@@ -2,9 +2,12 @@ package bap.jp.thanhbn.web_mvc.model;
 
 import java.util.List;
 
+import bap.jp.thanhbn.web_mvc.enums.Role;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,6 +30,10 @@ public class User {
 	@Column(name = "email", unique = true, nullable = false)
 	private String email;
 
+	@Column(name = "role", nullable = false)
+	@Enumerated(EnumType.STRING)
+	private Role role ;
+	
 	@Column(name = "password", nullable = false)
 	private String password;
 	
@@ -63,6 +70,16 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
 	}
 
 	@Override

@@ -15,6 +15,7 @@ import bap.jp.thanhbn.web_mvc.model.Product;
 import bap.jp.thanhbn.web_mvc.model.User;
 import bap.jp.thanhbn.web_mvc.service.cart.CartService;
 import bap.jp.thanhbn.web_mvc.service.product.ProductService;
+import bap.jp.thanhbn.web_mvc.service.user.UserService;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -26,6 +27,10 @@ public class CartController {
 
 	 @Autowired
 	 private ProductService productService;
+	 
+
+	 @Autowired
+	 private UserService userService; 
 
 	 @GetMapping("/add")
 	 public String addToCart(@RequestParam("productid") int productId) {
@@ -42,7 +47,7 @@ public class CartController {
 
 	@GetMapping
 	 public String index(Model model, HttpSession session) {
-			User logginUser = (User) session.getAttribute("loggedInUser");
+			User logginUser = userService.getCurrentUser();
 			if(logginUser == null) {
 				return "redirect:/login";
 			}

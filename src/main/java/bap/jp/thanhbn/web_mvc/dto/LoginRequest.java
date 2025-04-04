@@ -1,22 +1,22 @@
 package bap.jp.thanhbn.web_mvc.dto;
 
 public class LoginRequest {
-    private String email;
+    private String username;
     private String password;
 
     public LoginRequest() {}
 
-    public LoginRequest(String email, String password) {
-        this.email = email;
+    public LoginRequest(String username, String password) {
+        this.username = username;
         this.password = password;
     }
 
     public String getEmail() {
-        return email;
+        return username;
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        this.username = email;
     }
 
     public String getPassword() {
