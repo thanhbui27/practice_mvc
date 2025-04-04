@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
 import bap.jp.thanhbn.web_mvc.dto.LoginRequest;
+import bap.jp.thanhbn.web_mvc.dto.Register;
+import bap.jp.thanhbn.web_mvc.enums.Role;
 import bap.jp.thanhbn.web_mvc.model.User;
 import bap.jp.thanhbn.web_mvc.service.user.UserService;
 import jakarta.servlet.http.HttpSession;
@@ -23,34 +26,50 @@ public class AuthController {
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
 	@GetMapping("/login") 
-	public String index(){
+	public String login(){
 		
 		return "login";
 	}
 	
-	@PostMapping("/login")
-	public ModelAndView login(@ModelAttribute LoginRequest login, HttpSession session) {
+	@GetMapping("/register") 
+	public String register(){
 		
-		Optional<User> userOpt = userService.findByEmail(login.getEmail());	
-		
-		if(userOpt.isPresent()) {
-			User user = userOpt.get();
-			if(user.getPassword().equals(login.getPassword())) {
-				session.setAttribute("loggedInUser", userOpt.get());
-				return new ModelAndView("redirect:/");
-			}else {
-				ModelAndView mav = new ModelAndView("login");
-			    mav.addObject("error", "Mật khẩu sai");
-			    return mav;
-			}
-		}else {
-			ModelAndView mav = new ModelAndView("login");
-		    mav.addObject("error", "Không tìm thấy tài khoản!");
-		    return mav;
-		}
+		return "register";
+	}
 	
-	} 
+	@PostMapping("/register")
+	public ModelAndView register(@ModelAttribute Register register) {
+		
+		Optional<User> userOpt = userService.findByEmail(register.getEmail());	
+		
+		ModelAndView mv = new ModelAndView("register");
+
+		if(userOpt.isPresent()) {
+			mv.addObject("error", "Email da ton tai");
+			return mv;
+		}
+		
+		if(!register.getPassword().equals(register.getRePassword())) {
+			mv.addObject("error", "tai khoan hoac mat khau k dung");
+			return mv;
+		}
+		
+		User u = new User();
+		u.setEmail(register.getEmail());
+		u.setPassword(passwordEncoder.encode(register.getPassword()));
+		u.setUserName(register.getUsername());
+		u.setRole(Role.USER);
+		userService.createUser(u);
+		
+		return new ModelAndView("redirect:/login");
+
+	}
+		
+	
 	
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {

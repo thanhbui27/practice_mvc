@@ -15,6 +15,7 @@ import bap.jp.thanhbn.web_mvc.model.Order;
 import bap.jp.thanhbn.web_mvc.model.OrderItem;
 import bap.jp.thanhbn.web_mvc.model.User;
 import bap.jp.thanhbn.web_mvc.service.Order.OrderServiceImpl;
+import bap.jp.thanhbn.web_mvc.service.user.UserService;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -23,10 +24,13 @@ public class OrderController {
 
     @Autowired
     private OrderServiceImpl orderService;
-
+    
+    @Autowired
+    private UserService userService;
+    
     @GetMapping
-    public String listOrders(Model model, HttpSession session) {
-    	User u = (User) session.getAttribute("loggedInUser");
+    public String listOrders(Model model) {
+    	User u = userService.getCurrentUser();
     	if(u == null) {
 			return "redirect:/login";
 		}
@@ -35,11 +39,11 @@ public class OrderController {
         model.addAttribute("orders", orders);
         return "order";
     }
-
+    
 
     @PostMapping
     public String saveOrder(@ModelAttribute Order order) {
-    	       
+    	   
         if (order.getOrderItems() != null) {
             for (OrderItem item : order.getOrderItems()) {
                 item.setOrder(order);
@@ -48,7 +52,6 @@ public class OrderController {
               
         orderService.saveOrder(order);
 
-        
         return "redirect:/order";
     }
 

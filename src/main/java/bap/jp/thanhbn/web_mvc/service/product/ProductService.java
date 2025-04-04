@@ -10,4 +10,7 @@ import bap.jp.thanhbn.web_mvc.model.Product;
 public interface ProductService {
 	List<Product> getAllProduct();
 	Optional<Product> findById(int id);
+	void createProduct(Product p);
+	void updateProduct(Product p);
+	void removeProduct(Product p);
 }
